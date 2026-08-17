@@ -11,6 +11,16 @@ The project combines a **BigQuery data warehouse**, SQL-based analysis and **Loo
 
 > **Business question:** How can a growing retailer turn fragmented operational data into a scalable data layer and stakeholder-specific dashboards that support commercial decisions?
 
+## Portfolio role
+
+GoOutside sits between my exploratory analytics work and CustomerPulse in terms of complexity.
+
+It demonstrates how to move from raw operational files to a reusable warehouse and then translate the same data into **different decision products for different stakeholders**.
+
+**Data journey:**
+
+**CSV sources → BigQuery warehouse → SQL analysis → stakeholder KPIs → Looker Studio dashboards**
+
 ## The business problem
 
 GoOutside had years of product, retailer and sales data stored across separate files, but no simple way for non-technical teams to access or use it.
@@ -20,8 +30,6 @@ The project therefore had three layers:
 1. **Centralize the data** in BigQuery.
 2. **Model and query the data** so business metrics are consistent and reusable.
 3. **Deliver stakeholder-specific dashboards** in Looker Studio rather than asking business users to work directly with SQL.
-
-This is an important portfolio step between spreadsheet analysis and CustomerPulse: the emphasis is not only on finding an insight, but on designing a **data product for different users**.
 
 ## Dataset
 
@@ -129,6 +137,18 @@ Looker Studio
       └── Sarah: Finance / order-method dashboard
 ```
 
+## Decision design
+
+The dashboards intentionally do not use the same KPI set for every stakeholder.
+
+Dustin needs **market structure and retailer performance**.
+
+Sarah needs **channel contribution and financial efficiency**.
+
+That separation is the main product-design lesson of this project: one warehouse can support multiple decision workflows without forcing every user into one overloaded dashboard.
+
+See [`docs/stakeholder_decision_framework.md`](docs/stakeholder_decision_framework.md) for the full stakeholder-to-metric-to-action mapping.
+
 ## Dashboard
 
 A live Looker Studio report was created as the visualization layer:
@@ -137,21 +157,22 @@ A live Looker Studio report was created as the visualization layer:
 
 The design intentionally separates stakeholder views instead of forcing every metric into one page.
 
-## Project structure
+## Repository guide
 
 ```text
 GoOutside-Retail-Analytics/
 ├── README.md
 ├── data/
-│   └── README.md
+│   └── README.md                  # source tables and setup
 ├── sql/
-│   └── analysis_queries.sql
+│   └── analysis_queries.sql       # BigQuery analysis logic
 ├── images/
 │   ├── dustin-retail-performance.png
 │   ├── dustin-market-composition.png
 │   └── sarah-revenue-board.png
 └── docs/
-    └── metric_definitions.md
+    ├── metric_definitions.md
+    └── stakeholder_decision_framework.md
 ```
 
 ## Tools and skills demonstrated
