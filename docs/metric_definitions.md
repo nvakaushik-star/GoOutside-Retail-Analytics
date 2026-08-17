@@ -1,6 +1,6 @@
 # Metric definitions
 
-This document records the main metrics used in the GoOutside dashboards.
+This document records the main metrics used in the GoOutside dashboards and the calculation logic behind them.
 
 ## Revenue
 
@@ -10,6 +10,8 @@ Revenue = Quantity × Unit sale price
 
 Used for retailer, country and order-method performance.
 
+Portfolio baseline: approximately **€1.252B**.
+
 ## Gross profit
 
 ```text
@@ -18,13 +20,19 @@ Gross Profit = Quantity × (Unit sale price − Unit cost)
 
 Used in Sarah's Finance view.
 
+Portfolio baseline: approximately **€527.7M**.
+
 ## Gross margin
 
 ```text
-Gross Margin % = Gross Profit / Revenue × 100
+Gross Margin % = Total Gross Profit / Total Revenue × 100
 ```
 
 Portfolio baseline: approximately **42.17%**.
+
+### Aggregation note
+
+Gross margin is a ratio and should not be summed across rows. The portfolio metric should be calculated from aggregated gross profit and aggregated revenue. A dashboard scorecard that sums or averages row-level percentage values can be misleading.
 
 ## Active retailers
 
@@ -42,17 +50,25 @@ Portfolio baseline: **21 countries**.
 
 Sum of transaction quantity.
 
-Portfolio baseline: approximately **19.8 million units**.
+Portfolio baseline: approximately **19.80 million units**.
+
+## Active order methods
+
+Distinct order methods represented in sales.
+
+Portfolio baseline: **7 active order methods**.
 
 ## Retailer concentration
 
-The original dashboard provides rankings and market composition views. A stronger next iteration would calculate explicit concentration measures such as:
+The original dashboard provides retailer rankings and market-composition views. A stronger decision layer can calculate explicit concentration measures such as:
 
 - top-3 retailer revenue share by country
 - top-5 retailer revenue share by country
 - Herfindahl-Hirschman Index (HHI)
 
-These would make Dustin's 'big-player vs competitive market' classification more systematic.
+These measures make Dustin's **big-player vs competitive market** classification more systematic.
+
+The repository SQL includes a Top-3 retailer revenue-share query as the first explicit concentration measure.
 
 ## Channel economics limitation
 
